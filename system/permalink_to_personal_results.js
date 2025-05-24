@@ -23,6 +23,14 @@
 function checkIfUrlIsPermalink() {
    const urlParams = new URLSearchParams(window.location.search);
    if (urlParams.get("pos")) processPermalink(urlParams);
+   else if (urlParams.get("skip-intro")) {
+      showLoadingSpinner();
+      document.querySelector("#sectionDescription").classList.add("d-none");
+      setTimeout(() => {
+         document.querySelector("#descriptionButtonStart").click();
+         removeLoadingSpinner();
+      }, 1000);
+   }
 }
 
 function processPermalink(urlParams) {
@@ -203,6 +211,7 @@ window.addEventListener("load", () => {
    checkIfUrlIsPermalink();
 
    const observerResults = new MutationObserver(createBtnPermalink);
+
    observerResults.observe(document.querySelector("#resultsHeading"), {
       childList: true,
    });
