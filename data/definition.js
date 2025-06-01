@@ -551,7 +551,7 @@ if (addons.some((item) => item.includes("extras/addon_filter_results.js"))) {
          <div class="description-three-states-checkbox-list">
             <div>
                <span>
-                  1x: Erforderlich
+                  1x: Gewünscht
                </span>
                <div class="checkbox-container flex-center">
                   <i class="bx bx-border bx-check bg-color-success"></i>
@@ -570,14 +570,14 @@ if (addons.some((item) => item.includes("extras/addon_filter_results.js"))) {
             <div style="display: flex;">
                <button class="bx bxs-help-circle icon-help" style="font-size: 120%"
                onclick='showHelpModalExplainingFilterOption("Erklärung des Filters &#39;Themen&#39;",
-               "<strong>Klicke einmal</strong> auf ein Thema, um es als <strong>erforderlich bzw. gewünscht</strong> zu markieren. Jedes Spiel muss mind. eins deiner gewünschten Themen haben, sonst wird es ausgeblendet.<br><br><strong>Klicke zweimal</strong> auf ein Thema, um es <strong>auszuschließen</strong>. Jedes Spiel, das mind. eins deiner ausgeschlossenen Themen hat, wird zwangsläufig ausgeblendet &ndash; unabhängig von gewünschten Themen.", "undefined")'></button>
+               "<strong>Klicke einmal</strong> auf ein Thema, um es als <strong>gewünscht</strong> zu markieren. Jedes Spiel muss mind. eins deiner gewünschten Themen haben, sonst wird es ausgeblendet.<br><br><strong>Klicke zweimal</strong> auf ein Thema, um es <strong>auszuschließen</strong>. Jedes Spiel, das mind. eins deiner ausgeschlossenen Themen hat, wird zwangsläufig ausgeblendet &ndash; unabhängig von gewünschten Themen.", "undefined")'></button>
             </div>
          </div>`
                : `
          <div class="description-three-states-checkbox-list">
             <div>
                <span>
-                  1x: Required
+                  1x: Wanted
                </span>
                <div class="checkbox-container flex-center">
                   <i class="bx bx-border bx-check bg-color-success"></i>
@@ -596,7 +596,7 @@ if (addons.some((item) => item.includes("extras/addon_filter_results.js"))) {
             <div style="display: flex;">
                <button class="bx bxs-help-circle icon-help" style="font-size: 120%"
                onclick='showHelpModalExplainingFilterOption("Explanation of the filter &#39;Themes&#39;",
-               "<strong>Click once</strong> on a theme to mark it as <strong>required</strong>. Each game must have at least one of your required themes, otherwise it will be hidden.<br><br><strong>Click twice</strong> on a theme to mark it as <strong>excluded</strong>. Every game that has at least one of your excluded themes will inevitably be hidden &ndash; regardless of required themes.", "undefined")'></button>
+               "<strong>Click once</strong> on a theme to mark it as <strong>wanted</strong>. Each game must have at least one of your wanted themes, otherwise it will be hidden.<br><br><strong>Click twice</strong> on a theme to mark it as <strong>excluded</strong>. Every game that has at least one of your excluded themes will inevitably be hidden &ndash; regardless of wanted themes.", "undefined")'></button>
             </div>
          </div>`,
          options: [
@@ -720,7 +720,7 @@ if (addons.some((item) => item.includes("extras/addon_filter_results.js"))) {
          <div class="description-three-states-checkbox-list">
             <div>
                <span>
-                  1x: Erforderlich
+                  1x: Gewünscht
                </span>
                <div class="checkbox-container flex-center">
                   <i class="bx bx-border bx-check bg-color-success"></i>
@@ -739,14 +739,14 @@ if (addons.some((item) => item.includes("extras/addon_filter_results.js"))) {
             <div style="display: flex;">
                <button class="bx bxs-help-circle icon-help" style="font-size: 120%"
                onclick='showHelpModalExplainingFilterOption("Erklärung des Filters &#39;Mechaniken&#39;",
-               "<strong>Klicke einmal</strong> auf eine Mechanik, um sie als <strong>erforderlich bzw. gewünscht</strong> zu markieren. Jedes Spiel muss mind. eine deiner gewünschten Mechaniken haben, sonst wird es ausgeblendet.<br><br><strong>Klicke zweimal</strong> auf eine Mechanik, um sie <strong>auszuschließen</strong>. Jedes Spiel, das mind. eine deiner ausgeschlossenen Mechaniken hat, wird zwangsläufig ausgeblendet &ndash; unabhängig von gewünschten Mechaniken.", "undefined")'></button>
+               "<strong>Klicke einmal</strong> auf eine Mechanik, um sie als <strong>gewünscht</strong> zu markieren. Jedes Spiel muss mind. eine deiner gewünschten Mechaniken haben, sonst wird es ausgeblendet.<br><br><strong>Klicke zweimal</strong> auf eine Mechanik, um sie <strong>auszuschließen</strong>. Jedes Spiel, das mind. eine deiner ausgeschlossenen Mechaniken hat, wird zwangsläufig ausgeblendet &ndash; unabhängig von gewünschten Mechaniken.", "undefined")'></button>
             </div>
          </div>`
                : `
          <div class="description-three-states-checkbox-list">
             <div>
                <span>
-                  1x: Required
+                  1x: Wanted
                </span>
                <div class="checkbox-container flex-center">
                   <i class="bx bx-border bx-check bg-color-success"></i>
@@ -765,7 +765,7 @@ if (addons.some((item) => item.includes("extras/addon_filter_results.js"))) {
             <div style="display: flex;">
                <button class="bx bxs-help-circle icon-help" style="font-size: 120%"
                onclick='showHelpModalExplainingFilterOption("Explanation of the filter &#39;Mechanics&#39;",
-               "<strong>Click once</strong> on a mechanic to mark it as <strong>required</strong>. Each game must have at least one of your required mechanics, otherwise it will be hidden.<br><br><strong>Click twice</strong> on a mechanic to mark it as <strong>excluded</strong>. Every game that has at least one of your excluded mechanics will inevitably be hidden &ndash; regardless of required mechanics.", "undefined")'></button>
+               "<strong>Click once</strong> on a mechanic to mark it as <strong>wanted</strong>. Each game must have at least one of your wanted mechanics, otherwise it will be hidden.<br><br><strong>Click twice</strong> on a mechanic to mark it as <strong>excluded</strong>. Every game that has at least one of your excluded mechanics will inevitably be hidden &ndash; regardless of wanted mechanics.", "undefined")'></button>
             </div>
          </div>`,
          options: [
