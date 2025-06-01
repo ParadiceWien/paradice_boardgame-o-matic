@@ -1,8 +1,17 @@
 // Defines which i18n/i18n_xx.js file is used
-const language = "de";
+// const language = window.origin === "https://brettspiel-o-mat.de" ? "de" : "en";
 
+const language = "de";
 // This is the central configuration file of the Boardgame-O-Matic
 // If possible, all adjustments should be made through variables in this file
+
+const title =
+   language === "de" ? "Brettspiel-O-Mat (beta)" : "BoardGame-O-Matic (beta)";
+
+const metaDescription =
+   language === "de"
+      ? "Beantworte die kurzen Fragen und lass dir vom Matching-Algorithmus deine persönlichen Spiele-Highlights verraten!"
+      : "Answer the short questions and let the matching algorithm suggest your personal game highlights!";
 
 // Separator used in CSV files
 const separator = ";";
@@ -40,8 +49,8 @@ const showMainLogoInTopLeftCorner = true;
 const mainLogoPath = "./Brettspiel-O-Mat-Logo_transparent_cropped-min.png";
 const mainLogoWriting =
    language === "de"
-      ? "Brettspiel<br><span class='stretch-text'>-O-Mat</span>&nbsp;<small>(beta)</small>"
-      : "BoardGame<br><span class='stretch-text'>-O-Matic</span>&nbsp;<small>(beta)</small>";
+      ? "Brettspiel<br><span class='stretch-text-de'>-O-Mat</span>&nbsp;<small>(beta)</small>"
+      : "BoardGame<br><span class='stretch-text-en'>-O-Matic</span>&nbsp;<small>(beta)</small>";
 
 const mainLogoHref =
    language === "de"
@@ -58,7 +67,7 @@ const descriptionHeading1 =
 const descriptionHeading2 =
    language === "de"
       ? "Spielerisch passende Brettspiele finden"
-      : "Find your matching board games &ndash; playfully";
+      : "Find your matching board games";
 const descriptionExplanation =
    language === "de"
       ? "Beantworte die kurzen Fragen, um herauszufinden, welche Spiele aus der Datenbank am besten zu deinen Vorlieben passen."
@@ -532,14 +541,65 @@ if (addons.some((item) => item.includes("extras/addon_filter_results.js"))) {
                ? "Du musst mindestens eine Spieler:innenanzahl erlauben."
                : "You must allow at least one player number.",
       },
+
       {
          internalName: "themes",
-         type: "checkbox-list",
+         type: "three-states-checkbox-list",
          icon: "bxs-landscape",
          description:
             language === "de"
-               ? "Alle Spiele, die keins der ausgewählten Themen enthalten, werden ausgeschlossen."
-               : "All board games, which have none of your selected themes, are excluded from your results.",
+               ? `
+         <div class="description-three-states-checkbox-list">
+            <div>
+               <span>
+                  1x: Erforderlich
+               </span>
+               <div class="checkbox-container flex-center">
+                  <i class="bx bx-border bx-check bg-color-success"></i>
+                  <span>Beispiel</span>
+               </div>
+            </div>
+            <div>
+               <span>
+                  2x: Ausgeschlossen
+               </span>
+               <div class="checkbox-container flex-center">
+                  <i class="bx bx-border bx-x bg-color-danger"></i>
+                  <span class="line-through">Beispiel</span>
+               </div>
+            </div>
+            <div style="display: flex;">
+               <button class="bx bxs-help-circle icon-help" style="font-size: 120%"
+               onclick='showHelpModalExplainingFilterOption("Erklärung des Filters &#39;Themen&#39;",
+               "<strong>Klicke einmal</strong> auf ein Thema, um es als <strong>erforderlich bzw. gewünscht</strong> zu markieren. Jedes Spiel muss mind. eins deiner gewünschten Themen haben, sonst wird es ausgeblendet.<br><br><strong>Klicke zweimal</strong> auf ein Thema, um es <strong>auszuschließen</strong>. Jedes Spiel, das mind. eins deiner ausgeschlossenen Themen hat, wird zwangsläufig ausgeblendet &ndash; unabhängig von gewünschten Themen.", "undefined")'></button>
+            </div>
+         </div>`
+               : `
+         <div class="description-three-states-checkbox-list">
+            <div>
+               <span>
+                  1x: Required
+               </span>
+               <div class="checkbox-container flex-center">
+                  <i class="bx bx-border bx-check bg-color-success"></i>
+                  <span>Example</span>
+               </div>
+            </div>
+            <div>
+               <span>
+                  2x: Excluded
+               </span>
+               <div class="checkbox-container flex-center">
+                  <i class="bx bx-border bx-x bg-color-danger"></i>
+                  <span class="line-through">Example</span>
+               </div>
+            </div>
+            <div style="display: flex;">
+               <button class="bx bxs-help-circle icon-help" style="font-size: 120%"
+               onclick='showHelpModalExplainingFilterOption("Explanation of the filter &#39;Themes&#39;",
+               "<strong>Click once</strong> on a theme to mark it as <strong>required</strong>. Each game must have at least one of your required themes, otherwise it will be hidden.<br><br><strong>Click twice</strong> on a theme to mark it as <strong>excluded</strong>. Every game that has at least one of your excluded themes will inevitably be hidden &ndash; regardless of required themes.", "undefined")'></button>
+            </div>
+         </div>`,
          options: [
             {
                value: "adventure",
@@ -635,8 +695,6 @@ if (addons.some((item) => item.includes("extras/addon_filter_results.js"))) {
                label: language === "de" ? "Krieg & Kampf" : "War & Fighting",
             },
          ],
-         allCheckedByDefault: false,
-         checkedMeansExcluded: false,
          sortOptionsAlphabetically: true,
          strikethroughOptionsThatGetHidden: true,
          displayInCollapsibleSection: {
@@ -655,12 +713,62 @@ if (addons.some((item) => item.includes("extras/addon_filter_results.js"))) {
       },
       {
          internalName: "mechanics",
-         type: "checkbox-list",
+         type: "three-states-checkbox-list",
          icon: "bxs-cog",
          description:
             language === "de"
-               ? "Alle Spiele, die keine der ausgewählten Mechaniken enthalten, werden ausgeschlossen."
-               : "All board games, which have none of your selected mechanics, are excluded from your results.",
+               ? `
+         <div class="description-three-states-checkbox-list">
+            <div>
+               <span>
+                  1x: Erforderlich
+               </span>
+               <div class="checkbox-container flex-center">
+                  <i class="bx bx-border bx-check bg-color-success"></i>
+                  <span>Beispiel</span>
+               </div>
+            </div>
+            <div>
+               <span>
+                  2x: Ausgeschlossen
+               </span>
+               <div class="checkbox-container flex-center">
+                  <i class="bx bx-border bx-x bg-color-danger"></i>
+                  <span class="line-through">Beispiel</span>
+               </div>
+            </div>
+            <div style="display: flex;">
+               <button class="bx bxs-help-circle icon-help" style="font-size: 120%"
+               onclick='showHelpModalExplainingFilterOption("Erklärung des Filters &#39;Mechaniken&#39;",
+               "<strong>Klicke einmal</strong> auf eine Mechanik, um sie als <strong>erforderlich bzw. gewünscht</strong> zu markieren. Jedes Spiel muss mind. eine deiner gewünschten Mechaniken haben, sonst wird es ausgeblendet.<br><br><strong>Klicke zweimal</strong> auf eine Mechanik, um sie <strong>auszuschließen</strong>. Jedes Spiel, das mind. eine deiner ausgeschlossenen Mechaniken hat, wird zwangsläufig ausgeblendet &ndash; unabhängig von gewünschten Mechaniken.", "undefined")'></button>
+            </div>
+         </div>`
+               : `
+         <div class="description-three-states-checkbox-list">
+            <div>
+               <span>
+                  1x: Required
+               </span>
+               <div class="checkbox-container flex-center">
+                  <i class="bx bx-border bx-check bg-color-success"></i>
+                  <span>Example</span>
+               </div>
+            </div>
+            <div>
+               <span>
+                  2x: Excluded
+               </span>
+               <div class="checkbox-container flex-center">
+                  <i class="bx bx-border bx-x bg-color-danger"></i>
+                  <span class="line-through">Example</span>
+               </div>
+            </div>
+            <div style="display: flex;">
+               <button class="bx bxs-help-circle icon-help" style="font-size: 120%"
+               onclick='showHelpModalExplainingFilterOption("Explanation of the filter &#39;Mechanics&#39;",
+               "<strong>Click once</strong> on a mechanic to mark it as <strong>required</strong>. Each game must have at least one of your required mechanics, otherwise it will be hidden.<br><br><strong>Click twice</strong> on a mechanic to mark it as <strong>excluded</strong>. Every game that has at least one of your excluded mechanics will inevitably be hidden &ndash; regardless of required mechanics.", "undefined")'></button>
+            </div>
+         </div>`,
          options: [
             {
                value: "action",
@@ -867,8 +975,6 @@ if (addons.some((item) => item.includes("extras/addon_filter_results.js"))) {
                   "Agricola, Lords of Waterdeep, Viticulture, Caverna, Everdell, Dune: Imperium, Russian Railroads",
             },
          ],
-         allCheckedByDefault: false,
-         checkedMeansExcluded: false,
          sortOptionsAlphabetically: true,
          strikethroughOptionsThatGetHidden: true,
          displayInCollapsibleSection: {

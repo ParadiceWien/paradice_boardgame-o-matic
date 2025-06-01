@@ -5,6 +5,24 @@
 /* eslint-disable */
 
 function fnStart() {
+   document.querySelector("html").setAttribute("lang", language);
+   document.querySelector("title").textContent = title;
+   document
+      .querySelector("[property='og:title']")
+      .setAttribute("content", title);
+   document
+      .querySelector("[property='og:description']")
+      .setAttribute("content", metaDescription);
+   document
+      .querySelector("[name='description']")
+      .setAttribute("content", metaDescription);
+   document
+      .querySelector("[name='language']")
+      .setAttribute("content", language);
+   document
+      .querySelector("[name='Content-Language']")
+      .setAttribute("content", language);
+
    // alte Inhalte loeschen bzw. ausblenden
 
    // 1. Bereich -  Überschriften, Erklärung zur Wahl
@@ -282,6 +300,13 @@ function fnShowQuestionNumber(questionNumber) {
 
    // Alle Fragen durchgelaufen -> Auswertung
    else {
+      // Ask for confirmation before leaving in order to prevent accidental data loss
+      window.addEventListener("beforeunload", function (e) {
+         // Most browsers ignore the custom message, but setting returnValue is required to trigger the prompt
+         e.preventDefault(); // Required for some browsers
+         e.returnValue = ""; // Chrome requires returnValue to be set
+      });
+
       if (isActivated("addon_custom_voting_buttons.js")) {
          CUSTOM_POSITION_BUTTONS.forEach((questionWithCustomButtons) => {
             if (questionWithCustomButtons.isYesOrDontCareQuestion) {
@@ -1280,39 +1305,43 @@ function showOrHighlightBtnRefresh() {
    )
       return;
 
-   document.querySelector("#resultsTabBtn").addEventListener("click", () => {
-      fnReEvaluate();
-      for (i = 0; i < intParties; i++) {
-         arSortParties[i] = i;
-      }
-      arSortParties.sort((a, b) => arResults[b] - arResults[a]);
-      arSortParties.forEach((num) => {
-         document
-            .querySelector("#resultsShortTable .col")
-            .appendChild(
-               document.querySelector(`#resultsShortPartyClamp${num}`)
-            );
-      });
-      document
-         .querySelectorAll("[id^='resultsByThesisAnswersToQuestion']")
-         .forEach((table) => {
-            arSortParties.forEach((num) => {
-               table
-                  .querySelector(".col")
-                  .appendChild(table.querySelector(`.result${num}`));
-            });
+   document.querySelector("#resultsTabBtn").addEventListener(
+      "click",
+      () => {
+         fnReEvaluate();
+         for (i = 0; i < intParties; i++) {
+            arSortParties[i] = i;
+         }
+         arSortParties.sort((a, b) => arResults[b] - arResults[a]);
+         arSortParties.forEach((num) => {
+            document
+               .querySelector("#resultsShortTable .col")
+               .appendChild(
+                  document.querySelector(`#resultsShortPartyClamp${num}`)
+               );
          });
-      if (
-         isActivated("addon_filter_results.js") &&
-         DISPLAY_ANSWERS_TO_QUESTIONS_IN_RESULT_DETAILS?.showMatchWithPersonalAnswer
-      ) {
-         updateMatchTags();
-      }
-      sendMessageToLimitResultsAddon();
-      document
-         .querySelector("#resultsTabBtn")
-         .classList.remove("reload-results");
-   });
+         document
+            .querySelectorAll("[id^='resultsByThesisAnswersToQuestion']")
+            .forEach((table) => {
+               arSortParties.forEach((num) => {
+                  table
+                     .querySelector(".col")
+                     .appendChild(table.querySelector(`.result${num}`));
+               });
+            });
+         if (
+            isActivated("addon_filter_results.js") &&
+            DISPLAY_ANSWERS_TO_QUESTIONS_IN_RESULT_DETAILS?.showMatchWithPersonalAnswer
+         ) {
+            updateMatchTags();
+         }
+         sendMessageToLimitResultsAddon();
+         document
+            .querySelector("#resultsTabBtn")
+            .classList.remove("reload-results");
+      },
+      {once: true}
+   );
    document.querySelector("#resultsTabBtn").classList.add("reload-results");
 
    if (document.querySelector("#btn-see-updated-results")) return;

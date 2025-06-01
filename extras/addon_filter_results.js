@@ -141,7 +141,7 @@ function createFilterHtml(filter) {
       <label class="checkbox-list-label" for="filter-checkbox-list-${
          filter.internalName
       }-option${i}">
-      <i class='bx bx-sm bx-border ${
+      <i class='bx bx-border ${
          filter.checkedMeansExcluded
             ? "bx-x bg-color-danger"
             : "bx-check bg-color-success"
@@ -170,7 +170,32 @@ function createFilterHtml(filter) {
     <label for="filter-single-checkbox-${filter.internalName}"> ${
        filter.label
     }</label>`;
-   } else if (filter.type === "number-comparison") {
+   } else if (filter.type === "three-states-checkbox-list") {
+      divContent += `<div id="container-${filter.internalName}" class='container-three-states-checkbox-list' style='padding-left: 27px'>`;
+      if (filter.description)
+         divContent += `<p class="filter-description">${filter.description}</p>`;
+      for (let i = 0; i < filter.options.length; i++) {
+         divContent += `<div class="checkbox-container flex-center">
+         <select class="hidden-checkbox" id="filter-three-states-checkbox-list-${
+            filter.internalName
+         }-option${i}">
+            <option value="default" selected></option>
+            <option value="required"></option>
+            <option value="excluded"></option>
+         </select>
+      <label class="checkbox-list-label" for="filter-three-states-checkbox-list-${
+         filter.internalName
+      }-option${i}" onclick="changeStateOfPseudoCheckbox(this, ${filter.strikethroughOptionsThatGetHidden}); showBtnGoToUpdatedResults()">
+      <i class='bx bx-border bx-question-mark empty-checkbox'></i>
+      <span>${filter.options[i].label}</span>
+      </label>`;
+         if (filter.options[i].help) {
+            divContent += `<button class="bx bxs-help-circle icon-help" id="icon-help-${filter.internalName}-option${i}" onclick='showHelpModalExplainingFilterOption("${filter.options[i].label}",
+          "${filter.options[i].help}", "${filter.options[i].examples}")'></button>`;
+         }
+         divContent += `</div>`;
+      }
+      divContent += "</div>";
    }
    containerOfFilter.innerHTML = divContent;
    return containerOfFilter;
@@ -192,6 +217,33 @@ function toggleStylesOfLabel(element, strikethroughOptionsThatGetHidden) {
       element.nextElementSibling
          .querySelector("span")
          .classList.toggle("line-through");
+   }
+}
+
+function changeStateOfPseudoCheckbox(
+   nodeLabel,
+   strikethroughOptionsThatGetHidden
+) {
+   const nodeSelect = nodeLabel.previousElementSibling;
+   const nodePseudoCheckbox = nodeLabel.querySelector("i");
+   const nodeLabelSpan = nodeLabel.querySelector("span");
+   const currentState = nodeSelect.value;
+   if (currentState === "default") {
+      nodeSelect.value = "required";
+      nodePseudoCheckbox.classList.remove("bx-question-mark", "empty-checkbox");
+      nodePseudoCheckbox.classList.add("bx-check", "bg-color-success");
+   } else if (currentState === "required") {
+      nodeSelect.value = "excluded";
+      nodePseudoCheckbox.classList.remove("bx-check", "bg-color-success");
+      nodePseudoCheckbox.classList.add("bx-x", "bg-color-danger");
+      if (strikethroughOptionsThatGetHidden)
+         nodeLabelSpan.classList.add("line-through");
+   } else if (currentState === "excluded") {
+      nodeSelect.value = "default";
+      nodePseudoCheckbox.classList.remove("bx-x", "bg-color-danger");
+      nodePseudoCheckbox.classList.add("bx-question-mark", "empty-checkbox");
+      if (strikethroughOptionsThatGetHidden)
+         nodeLabelSpan.classList.remove("line-through");
    }
 }
 
@@ -507,9 +559,13 @@ function showBtnGoToUpdatedResults() {
    btnSeeUpdatedResults.addEventListener("click", () => {
       resultsTabBtn.click();
    });
-   resultsTabBtn.addEventListener("click", () => {
-      btnSeeUpdatedResults.remove();
-   });
+   resultsTabBtn.addEventListener(
+      "click",
+      () => {
+         btnSeeUpdatedResults.remove();
+      },
+      {once: true}
+   );
 }
 
 function hideResults() {
@@ -674,6 +730,55 @@ function hideResults() {
                nodeResult.classList.add(
                   `hidden-by-filter-${filter.internalName}`
                );
+         });
+      } else if (filter.type === "three-states-checkbox-list") {
+         const requiredOptions = [];
+         const excludedOptions = [];
+         for (let i = 0; i < filter.options.length; i++) {
+            const selectedOption = document.querySelector(
+               `#filter-three-states-checkbox-list-${filter.internalName}-option${i}`
+            ).value;
+            if (selectedOption === "required")
+               requiredOptions.push(filter.options[i].value);
+            else if (selectedOption === "excluded")
+               excludedOptions.push(filter.options[i].value);
+         }
+
+         nodelistAllResults.forEach((nodeResult) => {
+            nodeResult.classList.remove(
+               `hidden-by-filter-${filter.internalName}`
+            );
+            if (requiredOptions.length === 0 && excludedOptions.length === 0)
+               return;
+            const arCorrespondingFilterValues = nodeResult
+               .querySelector(".filter-values")
+               ?.getAttribute(`data-${filter.internalName}`)
+               ?.split(" ");
+
+            if (
+               excludedOptions.length > 0 &&
+               arCorrespondingFilterValues &&
+               excludedOptions.some((item) =>
+                  arCorrespondingFilterValues.includes(item)
+               )
+            ) {
+               nodeResult.classList.add(
+                  `hidden-by-filter-${filter.internalName}`
+               );
+               return;
+            }
+
+            if (
+               requiredOptions.length > 0 &&
+               (!arCorrespondingFilterValues ||
+                  !requiredOptions.some((item) =>
+                     arCorrespondingFilterValues.includes(item)
+                  ))
+            ) {
+               nodeResult.classList.add(
+                  `hidden-by-filter-${filter.internalName}`
+               );
+            }
          });
       }
    });

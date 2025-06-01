@@ -111,8 +111,12 @@ main {
    text-decoration: none;
 }
 
-.stretch-text {
+.stretch-text-de {
    letter-spacing: 0.25rem;
+}
+
+.stretch-text-en {
+   letter-spacing: 0.19rem;
 }
 
 /* Default is primary-color; yellow text on white background would have to little contrast*/
@@ -327,10 +331,6 @@ i.bx-sm {
    gap: 10px;
    align-items: center;
    width: 250px;
-}
-
-.container-checkbox-list i {
-   padding: 0.1em;
 }
 
 .btn-primary,
@@ -590,6 +590,7 @@ i.bx-sm {
 }
 .checkbox-container {
    margin-bottom: 0.5rem;
+   font-size: 95%;
 }
 
 .icon-help {
@@ -895,6 +896,7 @@ details[open] .disclosure-chevron::before {
    opacity: 0;
    width: 1px;
    height: 1px;
+   visibility: hidden;
 }
 
 .hidden-checkbox:focus-visible + label i {
@@ -1016,4 +1018,19 @@ details[open] .disclosure-chevron::before {
 /* Leave space for the navbar */
 #sectionResults {
    margin-bottom: 100px;
+}
+
+.description-three-states-checkbox-list {
+   display: flex;
+   margin-top: 20px;
+   gap: 15px;
+   font-style: italic;
+   font-size: 90%;
+   margin-top: 20px;
+   color: rgba(0, 0, 0, 0.75);
+}
+
+.description-three-states-checkbox-list > div:first-child {
+   border-right: 1px solid;
+   padding-right: 10px;
 }
