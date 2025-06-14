@@ -130,3 +130,7 @@ const TOOLTIP_FOR_DOUBLE_WEIGHTED_TAG_IN_RESULT_DETAILS =
    "Du hast diese Frage doppelt gewichtet.";
 
 const PREFIX_EXAMPLES_HELP_MODAL_FILTER_OPTION = "Z. B.";
+
+const TEXT_RESULTS_BUTTON_SHOW_MORE = "<strong>+</strong> Mehr zeigen";
+const TEXT_RESULTS_BUTTON_SHOW_LESS = "<strong>-</strong> Weniger zeigen";
+const TEXT_RESULTS_BUTTON_SHOW_ALL = "Alle zeigen";

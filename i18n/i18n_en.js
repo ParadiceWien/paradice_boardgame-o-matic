@@ -125,3 +125,7 @@ const TOOLTIP_FOR_DOUBLE_WEIGHTED_TAG_IN_RESULT_DETAILS =
 const TOOLTIP_FOR_MATCH_TAG_IN_RESULT_DETAILS_100_PERCENT =
    "You answered this question in exactly the same way.";
 const PREFIX_EXAMPLES_HELP_MODAL_FILTER_OPTION = "e. g.";
+
+const TEXT_RESULTS_BUTTON_SHOW_MORE = "<strong>+</strong> Show more";
+const TEXT_RESULTS_BUTTON_SHOW_LESS = "<strong>-</strong> Show less";
+const TEXT_RESULTS_BUTTON_SHOW_ALL = "Show all";
