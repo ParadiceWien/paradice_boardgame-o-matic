@@ -45,16 +45,16 @@ const matomoSiteId = "";
 
 // Logo in top left corner for branding (not recommended if embedded as iframe)
 const showMainLogoInTopLeftCorner = true;
-const mainLogoPath = "./Brettspiel-O-Mat-Logo_transparent_cropped-min.png";
+const mainLogoPath = "./Paradice_Logo.png";
 const mainLogoWriting =
    language === "de"
-      ? "Brettspiel<br><span class='stretch-text-de'>-O-Mat</span>&nbsp;<small>(beta)</small>"
-      : "BoardGame<br><span class='stretch-text-en'>-O-Matic</span>&nbsp;<small>(beta)</small>";
+      ? "Paradice<br><span class='stretch-text-de'>Brettspiel-O-Mat</span>&nbsp;"
+      : "Paradice<br><span class='stretch-text-en'>Boardgame-O-Matic</span>&nbsp;";
 
 const mainLogoHref =
    language === "de"
-      ? "https://brettspiel-o-mat.de"
-      : "https://boardgame-o-matic.com"; // The link opens in a new tab
+      ? "https://paradice.wien"
+      : "https://paradice.wien"; // The link opens in a new tab
 const mainLogoTitle =
    language === "de" ? "Brettspiel-O-Mat Logo" : "BoardGame-O-Matic Logo"; // This is just used for the title attribute of the image, it is not displayed
 
@@ -103,11 +103,11 @@ const aboutLink = "https://brettspiel-o-mat.de/#faq";
 // URL of imprint
 // If tool is embedded as iframe in a page which links to the imprint in its footer, the tool itself must not link to imprint as well
 // In this case, leave empty and set --display-imprint in the CSS file to "none"
-const imprintLink = "https://brettspiel-o-mat.de/impressum";
+const imprintLink = "https://www.paradice.wien/impressum";
 
 // See comment to imprintLink
 const privacyExternalPageLink =
-   "https://brettspiel-o-mat.de/datenschutzerklarung/";
+   "https://www.paradice.wien/datenschutz";
 
 // Instead of linking to a privacy policy page, you can also create on
 // If privacyExternalPageLink is falsy, the privacy button will open open a full screen modal
