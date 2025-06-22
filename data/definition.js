@@ -22,7 +22,7 @@ const fileQuestions = `questions-${language}.csv`;
 const intQuestions = 6;
 
 // Name of the CSV file with the board games in the /data directory
-const fileAnswers = "http://api.paradice.info/Games-de.csv";
+const fileAnswers = `games-${language}.csv`;
 
 // File paths to system and CSS files
 // If you have several instances of this tool running, you can use absolute references to global files (therefore, these are not hardcoded)=
