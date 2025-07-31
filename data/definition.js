@@ -490,34 +490,34 @@ if (addons.some((item) => item.includes("extras/addon_filter_results.js"))) {
     * checkedByDefault::bool (optional; default: false)
     * checkedMeansExcluded::bool (optional; default: false)
       */
-   {
-         internalName: "inventory-location",
-         type: "dropdown",
-         icon: "bxs-map",
-         label: "Standort",
-         description: "An welchem unserer Standorte bist du?",
-         options: [
-            {text: "Gleis//Garten", value: "foobar"},
-            {text: "JO&JOE", value: "foobaz"},
-            {text: "Seestadt", value: "foobax"},
-         ],
-         textOfOptionToShowAll: "Alle anzeigen",
-         displayInCollapsibleSection: {
-            isWanted: false,
-            heading: "Spieler:innenanzahl",
-         },
-         displayFilterValuesInResultDetails: {
-            isWanted: true,
-            // label: "Player number",
-            label: "Standort",
-            bulletList: false,
-         },
-         setAtStart: {
-            isWanted: true,
-            cardHeading: "Standort",
-            cardBody: "An welchem unserer Standorte bist du?",
-         },
-      },
+  // {
+  //       internalName: "inventory-location",
+  //       type: "dropdown",
+  //       icon: "bxs-map",
+  //       label: "Standort",
+  //       description: "An welchem unserer Standorte bist du?",
+  //       options: [
+  //          {text: "Gleis//Garten", value: "foobar"},
+  //          {text: "JO&JOE", value: "foobaz"},
+  //          {text: "Seestadt", value: "foobax"},
+  //      ],
+  //       textOfOptionToShowAll: "Alle anzeigen",
+  //       displayInCollapsibleSection: {
+  //          isWanted: false,
+  //          heading: "Spieler:innenanzahl",
+  //       },
+  //       displayFilterValuesInResultDetails: {
+  //          isWanted: true,
+  //          // label: "Player number",
+  //          label: "Standort",
+  //          bulletList: false,
+  //       },
+  //       setAtStart: {
+  //          isWanted: true,
+  //          cardHeading: "Standort",
+  //          cardBody: "An welchem unserer Standorte bist du?",
+  //       },
+  //    },
       {
          internalName: "player-number",
          type: "checkbox-list",
